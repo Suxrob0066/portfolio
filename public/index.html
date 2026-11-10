@@ -836,7 +836,7 @@ heroEl.addEventListener('mouseleave',()=>fls.forEach(f=>f.style.transform=''));
   const wrap=document.getElementById('views-wrap'), out=document.getElementById('views');
   let counted=false; try{counted=sessionStorage.getItem('viewed')==='1'}catch(e){}
   try{
-    const r=await fetch('/api/views',{method:counted?'GET':'POST'});
+    const r=await fetch('/api/eye',{method:counted?'GET':'POST'});
     if(!r.ok) return;
     const d=await r.json();
     if(typeof d.views!=='number') return;

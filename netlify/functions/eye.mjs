@@ -34,7 +34,7 @@ export default async (req, context) => {
 };
 
 export const config = {
-  path: "/api/views",
+  path: "/api/eye",
   method: ["GET", "POST"],
   rateLimit: { action: "rate_limit", aggregateBy: ["ip", "domain"], windowSize: 60, windowLimit: 20 },
 };
