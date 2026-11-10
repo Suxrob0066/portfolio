@@ -55,8 +55,10 @@ export default async (req, context) => {
   });
 
   if (!tg.ok) {
-    console.error("Telegram error", tg.status, await tg.text());
-    return json({ ok: false, error: "telegram" }, 502);
+    let detail = "";
+    try { detail = (await tg.json()).description || ""; } catch {}
+    console.error("Telegram error", tg.status, detail);
+    return json({ ok: false, error: "telegram", status: tg.status, detail }, 502);
   }
   return json({ ok: true });
 };
