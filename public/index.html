@@ -244,7 +244,7 @@ html.dark .wip-badge{background:#2a2112;border-color:#4a3713;color:#f5b74a}
 .chip .ps{width:20px;height:20px;border-radius:5px;background:#001e36;color:#31a8ff;font-size:10px;font-weight:700;display:grid;place-items:center}
 
 /* SKILLS v2 */
-.sk-wrap{display:grid;grid-template-columns:340px 1fr;gap:18px;align-items:stretch}
+.sk-wrap{display:grid;grid-template-columns:300px 1fr;gap:22px;align-items:stretch}
 .tools{display:grid;gap:14px}
 .tool-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:22px;padding:22px;background:var(--card);transition:transform .3s,box-shadow .3s}
 .tool-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
@@ -259,7 +259,7 @@ html.dark .wip-badge{background:#2a2112;border-color:#4a3713;color:#f5b74a}
 .tool-bar{height:6px;border-radius:6px;background:var(--bg-2);overflow:hidden}
 .tool-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--blue),#a855f7)}
 .ps-card .tool-bar i{background:linear-gradient(90deg,#31a8ff,var(--blue))}
-.sk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.sk-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .sk{display:flex;gap:14px;align-items:center;padding:16px 18px;border:1px solid var(--line);border-radius:18px;background:var(--card);transition:border-color .25s,transform .25s}
 .sk:hover{border-color:color-mix(in srgb,var(--blue) 50%,var(--line));transform:translateY(-2px)}
 .sk-ic{width:44px;height:44px;flex:none;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;transition:background .25s,color .25s}
@@ -267,8 +267,43 @@ html.dark .wip-badge{background:#2a2112;border-color:#4a3713;color:#f5b74a}
 .sk:hover .sk-ic{background:var(--blue);color:#fff}
 .sk b{display:block;font-size:15px;font-weight:600}
 .sk span{display:block;font-size:13px;color:var(--mute);margin-top:2px}
+@media (max-width:1100px){.sk-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:900px){.sk-wrap{grid-template-columns:1fr}.tools{grid-template-columns:1fr 1fr}}
-@media (max-width:560px){.tools,.sk-grid{grid-template-columns:1fr}}
+@media (max-width:560px){.tools{grid-template-columns:1fr}.sk-grid{grid-template-columns:1fr 1fr;gap:12px}.tc.sm .tc-in{min-height:170px;padding:18px 10px}.tc.sm span{font-size:12px}}
+/* TILT CARDS (gradient border + 3D tilt) */
+:root{--tc-bg:#ffffff;--tc-shadow:0 30px 60px -30px rgba(76,61,180,.35)}
+html.dark{--tc-bg:#151030;--tc-shadow:0 35px 120px -15px #211e35}
+.tc-grid{display:grid;gap:22px}
+.tc-4{grid-template-columns:repeat(4,1fr)}
+.tc{padding:1px;border-radius:20px;background:linear-gradient(90.13deg,#00cea8 1.9%,#bf61ff 97.5%);box-shadow:var(--tc-shadow);transform:perspective(900px) rotateX(0) rotateY(0);transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.tc.tilting{transition:transform .08s linear}
+.tc-in{position:relative;height:100%;border-radius:19px;background:var(--tc-bg);display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:14px;text-align:center;padding:30px 22px;min-height:260px;overflow:hidden;transform-style:preserve-3d}
+.tc-in::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.tc:hover .tc-in::after{opacity:1}
+.tc-in h4{font-family:var(--head);font-size:19px;font-weight:700;letter-spacing:-.01em}
+.tc-in p{color:var(--text-2);font-size:14px;line-height:1.55;max-width:230px}
+.gem{position:relative;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;color:#fff;transform:translateZ(40px) rotate(-8deg);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(0,0,0,.28),0 16px 30px -10px var(--gc,rgba(99,102,241,.75));animation:gemfloat 5s ease-in-out infinite}
+.gem::before{content:"";position:absolute;left:8px;top:6px;width:60%;height:38%;border-radius:14px 14px 30px 30px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0))}
+.gem svg{position:relative;width:30px;height:30px;stroke-width:2.2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+.gm1{background:linear-gradient(135deg,#2dd4bf,#3b82f6 55%,#8b5cf6);--gc:rgba(59,130,246,.7)}
+.gm2{background:linear-gradient(135deg,#22d3ee,#6366f1 55%,#d946ef);--gc:rgba(129,80,246,.7)}
+.gm3{background:linear-gradient(135deg,#34d399,#06b6d4 55%,#6366f1);--gc:rgba(6,182,212,.7)}
+.gm4{background:linear-gradient(135deg,#f0abfc,#a855f7 50%,#3b82f6);--gc:rgba(168,85,247,.7)}
+@keyframes gemfloat{0%,100%{transform:translateZ(40px) rotate(-8deg) translateY(0)}50%{transform:translateZ(40px) rotate(-4deg) translateY(-6px)}}
+.tc:nth-child(2) .gem{animation-delay:-1.2s}.tc:nth-child(3) .gem{animation-delay:-2.4s}.tc:nth-child(4) .gem{animation-delay:-3.6s}
+/* small skill cards */
+.tc.sm .tc-in{min-height:190px;padding:24px 16px;gap:10px}
+.tc.sm .gem{width:54px;height:54px;border-radius:16px}
+.tc.sm .gem svg{width:24px;height:24px}
+.tc.sm b{font-size:15.5px;font-weight:700;margin-top:6px}
+.tc.sm span{font-size:13px;color:var(--mute);line-height:1.45}
+/* tool cards inside tilt */
+.tc-in.tool-in{align-items:stretch;text-align:left;justify-content:flex-start;min-height:0;padding:22px}
+.tc-in.tool-in p{max-width:none}
+.tools .tc{height:100%}
+@media (max-width:1000px){.tc-4{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.tc-4{grid-template-columns:1fr}.tc-in{min-height:220px}}
+@media (prefers-reduced-motion:reduce){.gem{animation:none}}
 /* EDUCATION */
 .edu{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .ecard{border:1px solid var(--line);border-radius:20px;padding:24px;background:var(--card)}
@@ -498,11 +533,11 @@ footer{border-top:1px solid var(--line);margin-top:90px;padding:28px 0 110px}
   <div class="wrap">
     <h2 class="title rv" data-i="do_t">Nima qilaman</h2>
     <p class="lead-s rv" data-i="do_p">Vizual estetika va foydalanuvchi qulayligini birlashtirgan dizayn yechimlari.</p>
-    <div class="grid4">
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h4 data-i="s1">Web dizayn</h4><p data-i="s1p">Zamonaviy, responsive veb-saytlar va landing sahifalar.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.1a4 4 0 0 1 0 7.8M21 21v-2a4 4 0 0 0-3-3.9"/></svg></div><h4 data-i="s2">UX tadqiqot</h4><p data-i="s2p">Foydalanuvchi ehtiyojlari va axborot arxitekturasini o'rganish.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><h4 data-i="s3">Wireframe va prototip</h4><p data-i="s3p">Figma'da wireframe'dan interaktiv prototipgacha.</p></div>
-      <div class="svc rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7h2A5.5 5.5 0 0 0 22 11c0-5-4.5-9-10-9z"/></svg></div><h4 data-i="s4">Grafik dizayn</h4><p data-i="s4p">Ijtimoiy tarmoqlar, reklama va brending materiallari.</p></div>
+    <div class="tc-grid tc-4">
+      <div class="tc rv"><div class="tc-in"><div class="gem gm1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><h4 data-i="s1">Web dizayn</h4><p data-i="s1p">Zamonaviy, responsive veb-saytlar va landing sahifalar.</p></div></div>
+      <div class="tc rv"><div class="tc-in"><div class="gem gm2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.1a4 4 0 0 1 0 7.8M21 21v-2a4 4 0 0 0-3-3.9"/></svg></div><h4 data-i="s2">UX tadqiqot</h4><p data-i="s2p">Foydalanuvchi ehtiyojlari va muammolarini o'rganish.</p></div></div>
+      <div class="tc rv"><div class="tc-in"><div class="gem gm3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><h4 data-i="s3">Prototiplash</h4><p data-i="s3p">Figma'da interaktiv prototiplar yaratish.</p></div></div>
+      <div class="tc rv"><div class="tc-in"><div class="gem gm4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7h2A5.5 5.5 0 0 0 22 11c0-5-4.5-9-10-9z"/></svg></div><h4 data-i="s4">Grafik dizayn</h4><p data-i="s4p">Ijtimoiy tarmoqlar, reklama va brending materiallari.</p></div></div>
     </div>
   </div>
 </section>
@@ -514,20 +549,20 @@ footer{border-top:1px solid var(--line);margin-top:90px;padding:28px 0 110px}
     <p class="lead-s rv" data-i="sk_p">Kundalik ishimda foydalanadigan dasturlar va bilimlar.</p>
     <div class="sk-wrap">
       <div class="tools rv">
-        <div class="tool-card fg-card">
+        <div class="tc"><div class="tc-in tool-in fg-card">
           <div class="tool-top"><div class="tool-logo"><svg width="22" height="33" viewBox="0 0 38 57"><path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg></div><span class="tool-tag" data-i="tl_main">Asosiy vosita</span></div>
           <h4>Figma</h4>
           <p data-i="tl_fg">UI dizayn, prototip va dizaynni dasturchilarga topshirish</p>
           <div class="tool-bar"><i style="width:92%"></i></div>
-        </div>
-        <div class="tool-card ps-card">
+        </div></div>
+        <div class="tc"><div class="tc-in tool-in ps-card">
           <div class="tool-top"><div class="tool-logo ps">Ps</div><span class="tool-tag" data-i="tl_gr">Grafika</span></div>
           <h4>Adobe Photoshop</h4>
           <p data-i="tl_ps">Grafik dizayn, rasmlarga ishlov berish va bannerlar</p>
           <div class="tool-bar"><i style="width:80%"></i></div>
-        </div>
+        </div></div>
       </div>
-      <div class="sk-grid rv"><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><div><b data-i="k1">Web dizayn</b><span data-i="skd1">Saytlar va landing sahifalar</span></div></div><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg></div><div><b data-i="k2">Grafik dizayn</b><span data-i="skd2">Post, banner va brending</span></div></div><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><div><b data-i="k3">Foydalanuvchi tadqiqoti</b><span data-i="skd3">Ehtiyoj va muammolarni o'rganish</span></div></div><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-6 1.5L10 20z"/></svg></div><div><b data-i="k5">Prototiplash</b><span data-i="skd5">Figma'da interaktiv prototiplar</span></div></div><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></div><div><b data-i="k7">Dashboard dizayn</b><span data-i="skd7">Admin panellar va hisobotlar</span></div></div><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7h2A5.5 5.5 0 0 0 22 11c0-5-4.5-9-10-9z"/></svg></div><div><b data-i="k8">Rang nazariyasi</b><span data-i="skd8">Uyg'un palitra va kontrast</span></div></div><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div><div><b data-i="k9">Tipografiya</b><span data-i="skd9">Shrift tanlash va matn ierarxiyasi</span></div></div><div class="sk"><div class="sk-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="11" rx="1.5"/><rect x="17" y="8" width="5" height="12" rx="1"/><path d="M6 19h6"/></svg></div><div><b data-i="k10">Responsive dizayn</b><span data-i="skd10">Kompyuter, planshet va telefon</span></div></div></div>
+      <div class="sk-grid rv"><div class="tc sm"><div class="tc-in"><div class="gem gm1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><b data-i="k1">Web dizayn</b><span data-i="skd1">Saytlar va landing sahifalar</span></div></div><div class="tc sm"><div class="tc-in"><div class="gem gm2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg></div><b data-i="k2">Grafik dizayn</b><span data-i="skd2">Post, banner va brending</span></div></div><div class="tc sm"><div class="tc-in"><div class="gem gm3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div><b data-i="k3">Foydalanuvchi tadqiqoti</b><span data-i="skd3">Ehtiyoj va muammolarni o'rganish</span></div></div><div class="tc sm"><div class="tc-in"><div class="gem gm4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-6 1.5L10 20z"/></svg></div><b data-i="k5">Prototiplash</b><span data-i="skd5">Figma'da interaktiv prototiplar</span></div></div><div class="tc sm"><div class="tc-in"><div class="gem gm2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></div><b data-i="k7">Dashboard dizayn</b><span data-i="skd7">Admin panellar va hisobotlar</span></div></div><div class="tc sm"><div class="tc-in"><div class="gem gm4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7h2A5.5 5.5 0 0 0 22 11c0-5-4.5-9-10-9z"/></svg></div><b data-i="k8">Rang nazariyasi</b><span data-i="skd8">Uyg'un palitra va kontrast</span></div></div><div class="tc sm"><div class="tc-in"><div class="gem gm1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg></div><b data-i="k9">Tipografiya</b><span data-i="skd9">Shrift tanlash va matn ierarxiyasi</span></div></div><div class="tc sm"><div class="tc-in"><div class="gem gm3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="11" rx="1.5"/><rect x="17" y="8" width="5" height="12" rx="1"/><path d="M6 19h6"/></svg></div><b data-i="k10">Responsive dizayn</b><span data-i="skd10">Kompyuter, planshet va telefon</span></div></div></div>
     </div>
   </div>
 </section>
@@ -778,7 +813,7 @@ kilo_s:"Детская и женская одежда — на килограм�
 p2_t:"Новый проект",p3_t:"Новый проект",p4_t:"Новый проект",ph_p:"Детали проекта скоро появятся.",all_work:"Все работы в Instagram",
 exp_t:"Опыт работы",exp_p:"Где я работаю и чем занимаюсь.",job1:"Веб-дизайнер",job1_o:"Компания Supwork",job1_d:"Ноя 2025 — сейчас",now:"Работаю сейчас",sw_about:"узбекская IT-компания, создающая решения для бизнеса: системы управления складом (WMS), транспортом (TMS) и доставкой (DMS), AI-помощник для таможни и e-commerce платформы.",job1_intro:"С ноября 2025 года по настоящее время работаю веб-дизайнером в компании Supwork.",
 d1:"Создаю современные адаптивные дизайны для сайтов и страниц компании.",d2:"Готовлю графические материалы для соцсетей, рекламы и брендинга.",d3:"Делаю wireframe и интерактивные прототипы в Figma и передаю дизайн разработчикам.",d4:"Вместе с командой разрабатываю удобные и визуально целостные решения.",
-do_t:"Чем я занимаюсь",do_p:"Дизайн-решения, объединяющие эстетику и удобство.",s1:"Веб-дизайн",s1p:"Современные адаптивные сайты и лендинги.",s2:"UX-исследования",s2p:"Изучение потребностей пользователей и информационной архитектуры.",s3:"Wireframe и прототипы",s3p:"От wireframe до интерактивного прототипа в Figma.",s4:"Графический дизайн",s4p:"Материалы для соцсетей, рекламы и брендинга.",
+do_t:"Чем я занимаюсь",do_p:"Дизайн-решения, объединяющие эстетику и удобство.",s1:"Веб-дизайн",s1p:"Современные адаптивные сайты и лендинги.",s2:"UX-исследования",s2p:"Изучение потребностей и проблем пользователей.",s3:"Прототипирование",s3p:"Интерактивные прототипы в Figma.",s4:"Графический дизайн",s4p:"Материалы для соцсетей, рекламы и брендинга.",
 sk_t:"Инструменты и навыки",sk_p:"Программы и знания, которые я использую каждый день.",k1:"Веб-дизайн",k2:"Графический дизайн",k3:"Исследование пользователей",k5:"Прототипирование",k6:"Информационная архитектура",k7:"Дизайн дашбордов",k8:"Теория цвета",k9:"Типографика",k10:"Адаптивный дизайн",
 ed_t:"Образование и языки",ed_p:"Мои знания в области дизайна.",ed1_d:"Май — октябрь 2025",ed1:"Курс веб-дизайна",ed1_o:"Islom Academy · Академия Ислома Сафарова, Ташкент",ed1_p:"Практическое обучение UI-дизайну, принципам UX, wireframing и прототипированию.",
 langs_t:"Языки",l_uz:"Узбекский",l_uz_v:"Родной",l_ru:"Русский",l_ru_v:"Базовый",ct_t:"Контакты",ct_p:"Если вашему проекту нужен веб- или графический дизайн — пишите.",phone:"Телефон",loc_t:"Адрес",
@@ -792,7 +827,7 @@ kilo_s:"Kids' & women's clothing — by the kilo",cat_web:"Website design",kilo_
 p2_t:"New project",p3_t:"New project",p4_t:"New project",ph_p:"Project details coming soon.",all_work:"See all work on Instagram",
 exp_t:"Work Experience",exp_p:"Where I work and what I do.",job1:"Web Designer",job1_o:"Supwork company",job1_d:"Nov 2025 — Present",now:"Current role",sw_about:"an Uzbek IT company building business software: warehouse (WMS), transport (TMS) and delivery management (DMS) systems, an AI customs assistant and e-commerce platforms.",job1_intro:"Since November 2025 I have been working as a Web Designer at Supwork.",
 d1:"Design modern, responsive layouts for the company's websites and pages.",d2:"Create graphic materials for social media, advertising and branding.",d3:"Build wireframes and interactive prototypes in Figma and hand designs off to developers.",d4:"Work with the team on user-friendly, visually consistent solutions.",
-do_t:"What I Do",do_p:"Design solutions that combine aesthetics and usability.",s1:"Web Design",s1p:"Modern, responsive websites and landing pages.",s2:"UX Research",s2p:"Understanding user needs and information architecture.",s3:"Wireframes & Prototypes",s3p:"From wireframe to interactive prototype in Figma.",s4:"Graphic Design",s4p:"Materials for social media, ads and branding.",
+do_t:"What I Do",do_p:"Design solutions that combine aesthetics and usability.",s1:"Web Design",s1p:"Modern, responsive websites and landing pages.",s2:"UX Research",s2p:"Understanding user needs and pain points.",s3:"Prototyping",s3p:"Interactive prototypes in Figma.",s4:"Graphic Design",s4p:"Materials for social media, ads and branding.",
 sk_t:"Tools & Skills",sk_p:"The software and skills I use every day.",k1:"Web design",k2:"Graphic design",k3:"User research",k5:"Prototyping",k6:"Information architecture",k7:"Dashboard design",k8:"Color theory",k9:"Typography",k10:"Responsive design",
 ed_t:"Education & Languages",ed_p:"Where I learned design.",ed1_d:"May — Oct 2025",ed1:"Web Design Course",ed1_o:"Islom Academy · Islom Safarov's academy, Tashkent",ed1_p:"Hands-on training in UI design, UX principles, wireframing and prototyping.",
 langs_t:"Languages",l_uz:"Uzbek",l_uz_v:"Native",l_ru:"Russian",l_ru_v:"Basic",ct_t:"Get in Touch",ct_p:"Need web or graphic design for your project? Feel free to reach out.",phone:"Phone",loc_t:"Location",
@@ -881,6 +916,20 @@ heroEl.addEventListener('mouseleave',()=>fls.forEach(f=>f.style.transform=''));
     wrap.hidden=false;
   }catch(e){}
 })();
+
+// 3D tilt for gradient cards
+if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches){
+  document.querySelectorAll('.tc').forEach(c=>{
+    const max=c.classList.contains('sm')?14:12;
+    c.addEventListener('mousemove',e=>{
+      const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      c.classList.add('tilting');
+      c.style.transform=`perspective(900px) rotateX(${(.5-y)*max}deg) rotateY(${(x-.5)*max}deg) scale(1.03)`;
+      const inn=c.firstElementChild; inn.style.setProperty('--gx',x*100+'%'); inn.style.setProperty('--gy',y*100+'%');
+    });
+    c.addEventListener('mouseleave',()=>{c.classList.remove('tilting');c.style.transform='';});
+  });
+}
 // CV download (inside Claude artifact viewer uses downloads capability; elsewhere the plain link works)
 let dl=null;
 try{ if(window.claude&&window.claude.use){ window.claude.use('downloads').then(n=>{dl=n}).catch(()=>{}); } }catch(e){}
