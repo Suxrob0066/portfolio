@@ -8,6 +8,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=2">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#2563eb">
+<meta name="color-scheme" content="light dark">
+<script>try{var s=localStorage.getItem('themeChoice');if(s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.classList.add('dark')}catch(e){}</script>
 <title>Suxrob Amonov — Web & UX/UI Dizayner</title>
 <meta name="description" content="Suxrob Amonov — Toshkentdagi web dizayner, grafik dizayner va UX/UI dizayner portfoliosi.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -857,9 +859,12 @@ document.querySelectorAll('#langs button').forEach(b=>b.addEventListener('click'
 
 // theme
 const moon=document.getElementById('ico-moon'),sun=document.getElementById('ico-sun');
-function setTheme(d){document.documentElement.classList.toggle('dark',d);moon.style.display=d?'none':'';sun.style.display=d?'':'none';store('theme',d?'dark':'light')}
-document.getElementById('theme').addEventListener('click',()=>setTheme(!document.documentElement.classList.contains('dark')));
-setTheme(load('theme')==='dark');
+function setTheme(d,save){document.documentElement.classList.toggle('dark',d);moon.style.display=d?'none':'';sun.style.display=d?'':'none';if(save)store('themeChoice',d?'dark':'light')}
+const mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+document.getElementById('theme').addEventListener('click',()=>setTheme(!document.documentElement.classList.contains('dark'),true));
+const savedTheme=load('themeChoice');
+setTheme(savedTheme?savedTheme==='dark':!!(mq&&mq.matches));
+if(mq){const f=e=>{if(!load('themeChoice'))setTheme(e.matches)};mq.addEventListener?mq.addEventListener('change',f):mq.addListener(f)}
 const sl=load('lang');if(sl&&T[sl])setLang(sl);
 
 // typing words in CTA
