@@ -271,25 +271,25 @@ html.dark .wip-badge{background:#2a2112;border-color:#4a3713;color:#f5b74a}
 @media (max-width:900px){.sk-wrap{grid-template-columns:1fr}.tools{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.tools{grid-template-columns:1fr}.sk-grid{grid-template-columns:1fr 1fr;gap:12px}.tc.sm .tc-in{min-height:170px;padding:18px 10px}.tc.sm span{font-size:12px}}
 /* TILT CARDS (gradient border + 3D tilt) */
-:root{--tc-bg:#ffffff;--tc-shadow:0 30px 60px -30px rgba(76,61,180,.35)}
-html.dark{--tc-bg:#151030;--tc-shadow:0 35px 120px -15px #211e35}
+:root{--tc-bg:#ffffff;--tc-border:linear-gradient(140deg,#2563eb 0%,#93c5fd 40%,#e5e9f2 75%,#2563eb 100%);--tc-shadow:0 18px 40px -24px rgba(37,99,235,.45)}
+html.dark{--tc-bg:#11151f;--tc-border:linear-gradient(140deg,#4f83ff 0%,rgba(79,131,255,.25) 40%,#232836 75%,#4f83ff 100%);--tc-shadow:0 22px 50px -28px rgba(79,131,255,.55)}
 .tc-grid{display:grid;gap:22px}
 .tc-4{grid-template-columns:repeat(4,1fr)}
-.tc{padding:1px;border-radius:20px;background:linear-gradient(90.13deg,#00cea8 1.9%,#bf61ff 97.5%);box-shadow:var(--tc-shadow);transform:perspective(900px) rotateX(0) rotateY(0);transform-style:preserve-3d;transition:transform .45s cubic-bezier(.2,.8,.2,1);will-change:transform}
-.tc.tilting{transition:transform .08s linear}
+.tc{padding:1px;border-radius:20px;background:var(--tc-border);box-shadow:var(--tc-shadow);transform:perspective(1000px);transform-style:preserve-3d;will-change:transform;backface-visibility:hidden}
 .tc-in{position:relative;height:100%;border-radius:19px;background:var(--tc-bg);display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:14px;text-align:center;padding:30px 22px;min-height:260px;overflow:hidden;transform-style:preserve-3d}
-.tc-in::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.14),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.tc-in::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.22),transparent 55%);opacity:0;transition:opacity .25s;pointer-events:none}
+html:not(.dark) .tc-in::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(37,99,235,.10),transparent 55%)}
 .tc:hover .tc-in::after{opacity:1}
 .tc-in h4{font-family:var(--head);font-size:19px;font-weight:700;letter-spacing:-.01em}
 .tc-in p{color:var(--text-2);font-size:14px;line-height:1.55;max-width:230px}
-.gem{position:relative;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;color:#fff;transform:translateZ(40px) rotate(-8deg);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(0,0,0,.28),0 16px 30px -10px var(--gc,rgba(99,102,241,.75));animation:gemfloat 5s ease-in-out infinite}
+.gem{position:relative;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;color:#fff;transform:translateZ(30px) rotate(-8deg);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(0,0,0,.28),0 16px 30px -10px var(--gc,rgba(99,102,241,.75));animation:gemfloat 5s ease-in-out infinite}
 .gem::before{content:"";position:absolute;left:8px;top:6px;width:60%;height:38%;border-radius:14px 14px 30px 30px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0))}
 .gem svg{position:relative;width:30px;height:30px;stroke-width:2.2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
-.gm1{background:linear-gradient(135deg,#2dd4bf,#3b82f6 55%,#8b5cf6);--gc:rgba(59,130,246,.7)}
-.gm2{background:linear-gradient(135deg,#22d3ee,#6366f1 55%,#d946ef);--gc:rgba(129,80,246,.7)}
-.gm3{background:linear-gradient(135deg,#34d399,#06b6d4 55%,#6366f1);--gc:rgba(6,182,212,.7)}
-.gm4{background:linear-gradient(135deg,#f0abfc,#a855f7 50%,#3b82f6);--gc:rgba(168,85,247,.7)}
-@keyframes gemfloat{0%,100%{transform:translateZ(40px) rotate(-8deg) translateY(0)}50%{transform:translateZ(40px) rotate(-4deg) translateY(-6px)}}
+.gm1{background:linear-gradient(135deg,#60a5fa,#2563eb 55%,#1e40af);--gc:rgba(37,99,235,.65)}
+.gm2{background:linear-gradient(135deg,#7dd3fc,#3b82f6 55%,#1d4ed8);--gc:rgba(59,130,246,.6)}
+.gm3{background:linear-gradient(135deg,#a5b4fc,#6366f1 55%,#2563eb);--gc:rgba(99,102,241,.6)}
+.gm4{background:linear-gradient(135deg,#93c5fd,#2563eb 50%,#4338ca);--gc:rgba(67,56,202,.55)}
+@keyframes gemfloat{0%,100%{transform:translateZ(30px) rotate(-8deg)}50%{transform:translateZ(30px) rotate(-5deg) translateY(-5px)}}
 .tc:nth-child(2) .gem{animation-delay:-1.2s}.tc:nth-child(3) .gem{animation-delay:-2.4s}.tc:nth-child(4) .gem{animation-delay:-3.6s}
 /* small skill cards */
 .tc.sm .tc-in{min-height:190px;padding:24px 16px;gap:10px}
@@ -917,17 +917,25 @@ heroEl.addEventListener('mouseleave',()=>fls.forEach(f=>f.style.transform=''));
   }catch(e){}
 })();
 
-// 3D tilt for gradient cards
+// 3D tilt for gradient cards (requestAnimationFrame + easing = smooth & light)
 if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches){
   document.querySelectorAll('.tc').forEach(c=>{
-    const max=c.classList.contains('sm')?14:12;
-    c.addEventListener('mousemove',e=>{
+    const max=c.classList.contains('sm')?16:13, inn=c.firstElementChild;
+    let tx=0,ty=0,ts=1,cx=0,cy=0,cs=1,raf=0;
+    const loop=()=>{
+      cx+=(tx-cx)*.18; cy+=(ty-cy)*.18; cs+=(ts-cs)*.18;
+      c.style.transform=`perspective(1000px) rotateX(${cx.toFixed(2)}deg) rotateY(${cy.toFixed(2)}deg) scale(${cs.toFixed(3)})`;
+      if(Math.abs(tx-cx)>.02||Math.abs(ty-cy)>.02||Math.abs(ts-cs)>.001) raf=requestAnimationFrame(loop);
+      else { raf=0; if(!tx&&!ty&&ts===1) c.style.transform=''; }
+    };
+    const kick=()=>{ if(!raf) raf=requestAnimationFrame(loop); };
+    c.addEventListener('pointermove',e=>{
       const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-      c.classList.add('tilting');
-      c.style.transform=`perspective(900px) rotateX(${(.5-y)*max}deg) rotateY(${(x-.5)*max}deg) scale(1.03)`;
-      const inn=c.firstElementChild; inn.style.setProperty('--gx',x*100+'%'); inn.style.setProperty('--gy',y*100+'%');
+      tx=(.5-y)*max; ty=(x-.5)*max; ts=1.04;
+      inn.style.setProperty('--gx',(x*100).toFixed(1)+'%'); inn.style.setProperty('--gy',(y*100).toFixed(1)+'%');
+      kick();
     });
-    c.addEventListener('mouseleave',()=>{c.classList.remove('tilting');c.style.transform='';});
+    c.addEventListener('pointerleave',()=>{tx=0;ty=0;ts=1;kick();});
   });
 }
 // CV download (inside Claude artifact viewer uses downloads capability; elsewhere the plain link works)
