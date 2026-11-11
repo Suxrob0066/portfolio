@@ -269,18 +269,18 @@ html.dark .wip-badge{background:#2a2112;border-color:#4a3713;color:#f5b74a}
 @media (max-width:900px){.sk-wrap{grid-template-columns:1fr}.tools{grid-template-columns:1fr 1fr}}
 @media (max-width:560px){.tools{grid-template-columns:1fr}.sk-grid{grid-template-columns:1fr 1fr;gap:12px}.tc.sm .tc-in{min-height:170px;padding:18px 10px}.tc.sm span{font-size:12px}}
 /* TILT CARDS (gradient border + 3D tilt) */
-:root{--tc-bg:#ffffff;--tc-border:linear-gradient(140deg,#2563eb 0%,#93c5fd 40%,#e5e9f2 75%,#2563eb 100%);--tc-shadow:0 18px 40px -24px rgba(37,99,235,.45)}
-html.dark{--tc-bg:#11151f;--tc-border:linear-gradient(140deg,#4f83ff 0%,rgba(79,131,255,.25) 40%,#232836 75%,#4f83ff 100%);--tc-shadow:0 22px 50px -28px rgba(79,131,255,.55)}
+:root{--tc-bg:#ffffff;--tc-border:linear-gradient(140deg,#2563eb 0%,#93c5fd 40%,#e5e9f2 75%,#2563eb 100%);--tc-shadow:0 10px 24px -18px rgba(37,99,235,.35)}
+html.dark{--tc-bg:#11151f;--tc-border:linear-gradient(140deg,#4f83ff 0%,rgba(79,131,255,.25) 40%,#232836 75%,#4f83ff 100%);--tc-shadow:0 12px 28px -22px rgba(79,131,255,.4)}
 .tc-grid{display:grid;gap:22px}
 .tc-4{grid-template-columns:repeat(4,1fr)}
 .tc{padding:1px;border-radius:20px;background:var(--tc-border);box-shadow:var(--tc-shadow);transform:perspective(1000px);transform-style:preserve-3d;will-change:transform;backface-visibility:hidden}
 .tc-in{position:relative;height:100%;border-radius:19px;background:var(--tc-bg);display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;gap:14px;text-align:center;padding:30px 22px;min-height:260px;overflow:hidden;transform-style:preserve-3d}
-.tc-in::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(255,255,255,.22),transparent 55%);opacity:0;transition:opacity .25s;pointer-events:none}
-html:not(.dark) .tc-in::after{background:radial-gradient(circle at var(--gx,50%) var(--gy,0%),rgba(37,99,235,.10),transparent 55%)}
+.tc-in::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(var(--ga,135deg),rgba(255,255,255,.16) 0%,rgba(255,255,255,.05) 45%,rgba(255,255,255,0) 70%);opacity:0;transition:opacity .3s;pointer-events:none}
+html:not(.dark) .tc-in::after{background:linear-gradient(var(--ga,135deg),rgba(37,99,235,.07) 0%,rgba(37,99,235,.02) 45%,rgba(37,99,235,0) 70%)}
 .tc:hover .tc-in::after{opacity:1}
 .tc-in h4{font-family:var(--head);font-size:19px;font-weight:700;letter-spacing:-.01em}
 .tc-in p{color:var(--text-2);font-size:14px;line-height:1.55;max-width:230px}
-.gem{position:relative;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;color:#fff;transform:translateZ(30px) rotate(-8deg);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(0,0,0,.28),0 16px 30px -10px var(--gc,rgba(99,102,241,.75));animation:gemfloat 5s ease-in-out infinite}
+.gem{position:relative;width:68px;height:68px;border-radius:20px;display:grid;place-items:center;color:#fff;transform:translateZ(30px) rotate(-8deg);box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -8px 14px rgba(0,0,0,.25),0 10px 18px -10px var(--gc,rgba(99,102,241,.6));animation:gemfloat 5s ease-in-out infinite}
 .gem::before{content:"";position:absolute;left:8px;top:6px;width:60%;height:38%;border-radius:14px 14px 30px 30px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0))}
 .gem svg{position:relative;width:30px;height:30px;stroke-width:2.2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
 .gm1{background:linear-gradient(135deg,#60a5fa,#2563eb 55%,#1e40af);--gc:rgba(37,99,235,.65)}
@@ -918,19 +918,19 @@ heroEl.addEventListener('mouseleave',()=>fls.forEach(f=>f.style.transform=''));
 // 3D tilt for gradient cards (requestAnimationFrame + easing = smooth & light)
 if(matchMedia('(hover:hover) and (pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:reduce)').matches){
   document.querySelectorAll('.tc').forEach(c=>{
-    const max=c.classList.contains('sm')?16:13, inn=c.firstElementChild;
+    const max=c.classList.contains('sm')?26:24, inn=c.firstElementChild;
     let tx=0,ty=0,ts=1,cx=0,cy=0,cs=1,raf=0;
     const loop=()=>{
-      cx+=(tx-cx)*.18; cy+=(ty-cy)*.18; cs+=(ts-cs)*.18;
-      c.style.transform=`perspective(1000px) rotateX(${cx.toFixed(2)}deg) rotateY(${cy.toFixed(2)}deg) scale(${cs.toFixed(3)})`;
+      cx+=(tx-cx)*.22; cy+=(ty-cy)*.22; cs+=(ts-cs)*.22;
+      c.style.transform=`perspective(800px) rotateX(${cx.toFixed(2)}deg) rotateY(${cy.toFixed(2)}deg) scale(${cs.toFixed(3)})`;
       if(Math.abs(tx-cx)>.02||Math.abs(ty-cy)>.02||Math.abs(ts-cs)>.001) raf=requestAnimationFrame(loop);
       else { raf=0; if(!tx&&!ty&&ts===1) c.style.transform=''; }
     };
     const kick=()=>{ if(!raf) raf=requestAnimationFrame(loop); };
     c.addEventListener('pointermove',e=>{
       const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
-      tx=(.5-y)*max; ty=(x-.5)*max; ts=1.04;
-      inn.style.setProperty('--gx',(x*100).toFixed(1)+'%'); inn.style.setProperty('--gy',(y*100).toFixed(1)+'%');
+      tx=(.5-y)*max; ty=(x-.5)*max; ts=1.03;
+      inn.style.setProperty('--ga',(Math.atan2(y-.5,x-.5)*180/Math.PI+90).toFixed(0)+'deg');
       kick();
     });
     c.addEventListener('pointerleave',()=>{tx=0;ty=0;ts=1;kick();});
