@@ -142,6 +142,19 @@ html.dark .g1{opacity:.22}html.dark .g2{opacity:.16}
 .proj:hover .wms-shot.phone{transform:translateY(-12px) rotate(-2deg)}
 .case-btn{position:absolute;left:20px;bottom:18px;background:#fff;color:#1d4ed8;font-weight:600;font-size:14px;padding:9px 16px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(0,0,0,.3);opacity:0;transform:translateY(8px);transition:all .3s}
 .proj:hover .case-btn{opacity:1;transform:none}
+
+/* projects: 2 columns side by side */
+.grid2 .proj.feat{grid-column:auto}
+.grid2 .proj .cover{aspect-ratio:4/3}
+.grid2 .wms-shot.main{left:7%;top:16%;width:72%}
+.grid2 .wms-shot.phone{right:5%;top:24%;width:24%;border-width:3px}
+.grid2 .lbm-cover-img{object-fit:cover;object-position:8% center}
+@media (max-width:640px){.grid2 .och-browser,.grid2 .wms-shot.main{top:22%}.grid2 .och-phone,.grid2 .wms-shot.phone{top:28%}}
+.grid2 .och-browser{left:6%;top:16%;width:72%}
+.grid2 .och-phone{right:5%;top:24%;width:24%}
+.grid2 .live-badge{transform:scale(.92);transform-origin:left top}
+.grid2 .proj h3{font-size:19px}
+.grid2 .lbm-cover-wrap .live-badge{top:auto;bottom:16px;left:auto;right:16px;transform-origin:right bottom}
 /* CASE MODAL */
 .case{position:fixed;inset:0;z-index:100;display:none}
 .case.open{display:block}
